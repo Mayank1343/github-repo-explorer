@@ -5,6 +5,8 @@ import ProfileCard from "../components/ProfileCard";
 import StatsCards from "../components/StatsCards";
 
 import { fetchGithubUser } from "../services/githubService";
+import DeveloperInsights from "../components/DeveloperInsights";
+import RepoList from "../components/RepoList";
 
 function Home() {
   const [data, setData] = useState(null);
@@ -40,6 +42,10 @@ function Home() {
             profile={data.profile}
             repos={data.repos}
           />
+
+          <DeveloperInsights repos={data.repos} />
+
+          <RepoList repos={data.repos} />
         </>
       )}
     </div>
