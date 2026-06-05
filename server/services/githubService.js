@@ -5,6 +5,7 @@ const {
   setCachedData,
 } = require("./cacheService");
 
+
 const fetchGithubUser = async (
   username
 ) => {
@@ -17,16 +18,20 @@ const fetchGithubUser = async (
     return cachedData;
   }
 
-  console.log("Fetching from GitHub API");
+    console.log("Fetching from GitHub API");
 
-  const profileResponse =
-    await axios.get(
-      `https://api.github.com/users/${username}`
+    const headers = {
+      Authorization: `token ${process.env.GITHUB_TOKEN}`,
+    };
+
+    const profileResponse = await axios.get(
+      `https://api.github.com/users/${username}`,
+      { headers }
     );
 
-  const reposResponse =
-    await axios.get(
-      `https://api.github.com/users/${username}/repos`
+    const reposResponse = await axios.get(
+      `https://api.github.com/users/${username}/repos`,
+      { headers }
     );
 
   const result = {
