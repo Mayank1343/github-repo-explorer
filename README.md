@@ -1,103 +1,109 @@
 # GitHub Developer Dashboard
 
-A full-stack analytics dashboard that transforms raw GitHub profile data into actionable developer insights.
+> A full-stack analytics dashboard that transforms raw GitHub profile data into meaningful developer insights.
 
-Built using React, Node.js, Express, and the GitHub REST API, the application provides a clean interface for exploring developer profiles, repository metrics, language distribution, and repository-level analytics.
+![React](https://img.shields.io/badge/React-19-blue?logo=react)
+![Node.js](https://img.shields.io/badge/Node.js-Backend-green?logo=node.js)
+![Express](https://img.shields.io/badge/Express.js-API-black?logo=express)
+![GitHub API](https://img.shields.io/badge/GitHub-REST_API-181717?logo=github)
+![Vercel](https://img.shields.io/badge/Frontend-Vercel-black?logo=vercel)
+![Render](https://img.shields.io/badge/Backend-Render-46E3B7)
 
 ---
 
 ## Live Demo
 
-Frontend: [Add Vercel URL]
+🌐 Frontend: https://github-dev-dashboard.vercel.app
 
-Backend API: [Add Render URL]
-
----
-
-## Project Overview
-
-GitHub Developer Dashboard enables users to search any public GitHub profile and instantly visualize:
-
-* Developer profile information
-* Repository statistics
-* Language distribution
-* Repository analytics
-* Recent search history
-* Detailed repository insights
-
-The project focuses on delivering a responsive and user-friendly experience while demonstrating full-stack development principles such as API integration, caching, analytics generation, state management, and scalable component architecture.
+⚙️ Backend API: https://github-dashboard-api-zz83.onrender.com
 
 ---
 
-## Key Features
+## Overview
+
+GitHub Developer Dashboard is a full-stack web application that allows users to search any public GitHub profile and instantly explore developer statistics, repository insights, language distribution, and repository analytics.
+
+The project was built to demonstrate practical full-stack engineering concepts including API integration, caching, state management, data visualization, responsive UI design, deployment, and production-ready architecture.
+
+---
+
+## Features
 
 ### Developer Profile Dashboard
 
-* Profile avatar and bio
-* Followers and following count
-* Public repository statistics
+* Developer avatar and profile information
+* Bio, followers, following, and repository statistics
+* Clean and responsive profile layout
 
 ### Repository Explorer
 
-* Search repositories
-* Sort repositories by multiple criteria
+* Search repositories by name
+* Sort repositories dynamically
 * Expand repository details
-* View repository metadata
+* View repository metadata including:
+
+  * Stars
+  * Forks
+  * Open Issues
+  * Default Branch
+  * Last Updated Date
 
 ### Developer Analytics
 
 * Primary language detection
 * Most starred repository
-* Language distribution visualization
-* Repository activity insights
+* Recently updated repository
+* Total stars and forks
+* Repository language distribution
 
-### User Experience Enhancements
+### Data Visualization
 
+* Interactive language distribution pie chart
+* Repository analytics overview
+* Dynamic metric generation from GitHub data
+
+### User Experience
+
+* Dark theme interface
 * Recent search history using Local Storage
-* Full-screen loading states
+* Full-screen loading spinner
+* Render server wake-up notification
 * Error handling and validation
-* Responsive design
-* GitHub-inspired dark theme
+* Responsive design across devices
 
-### Performance Optimizations
+### Performance Optimization
 
 * Server-side caching layer
-* Reduced redundant GitHub API requests
-* Faster subsequent searches
+* Reduced GitHub API requests
+* Faster repeated searches
+* GitHub Personal Access Token integration to avoid rate limiting
 
 ---
 
 ## System Architecture
 
-┌──────────────────────┐
-│    React Frontend    │
-└──────────┬───────────┘
-│
-▼
-┌──────────────────────┐
-│    Express Backend   │
-└──────────┬───────────┘
-│
-▼
-┌──────────────────────┐
-│    Cache Service     │
-└──────────┬───────────┘
-│
-▼
-┌──────────────────────┐
-│    GitHub REST API   │
-└──────────────────────┘
+| Layer | Responsibility |
+|---------|---------------|
+| React Frontend | User interface, state management, data visualization |
+| Express Backend | API orchestration and data transformation |
+| Cache Service | Reduces redundant GitHub API requests |
+| GitHub REST API | Source of developer and repository data |
 
-### Request Flow
+### Data Flow
 
-1. User searches a GitHub username.
-2. Frontend sends request to Express backend.
-3. Backend checks cache.
-4. Cached response is returned if available.
-5. Otherwise GitHub API is queried.
-6. Data is transformed into a clean response format.
-7. Response is cached and returned to frontend.
-8. Analytics are generated and visualized.
+User Search
+↓
+React Frontend
+↓
+Express Backend
+↓
+Cache Check
+↓
+GitHub API (if cache miss)
+↓
+Processed Response
+↓
+Analytics Dashboard
 
 ---
 
@@ -130,34 +136,42 @@ The project focuses on delivering a responsive and user-friendly experience whil
 
 ## Project Structure
 
-client/
-├── src/
-│ ├── components/
-│ ├── pages/
-│ ├── services/
-│ └── App.jsx
+```text
+github-repo-explorer/
 │
-server/
-├── controllers/
-├── routes/
-├── services/
-├── app.js
-└── server.js
+├── client/
+│   ├── src/
+│   │   ├── components/
+│   │   ├── pages/
+│   │   ├── services/
+│   │   ├── App.jsx
+│   │   └── main.jsx
+│   │
+│   └── package.json
+│
+├── server/
+│   ├── controllers/
+│   ├── routes/
+│   ├── services/
+│   ├── app.js
+│   └── package.json
+│
+└── README.md
 
 ---
 
 ## Analytics Implemented
 
-The dashboard generates several derived metrics from raw GitHub data:
+The dashboard derives several metrics directly from GitHub repository data:
 
-* Total Stars
-* Total Forks
-* Primary Language
-* Repository Distribution by Language
-* Most Starred Repository
-* Repository Activity Analysis
-
-These metrics are computed dynamically from repository data returned by GitHub APIs.
+| Metric                      | Description                        |
+| --------------------------- | ---------------------------------- |
+| Total Stars                 | Combined stars across repositories |
+| Total Forks                 | Combined forks across repositories |
+| Primary Language            | Most frequently used language      |
+| Most Starred Repository     | Repository with highest stars      |
+| Recently Updated Repository | Most active repository             |
+| Language Distribution       | Repository breakdown by language   |
 
 ---
 
@@ -165,16 +179,19 @@ These metrics are computed dynamically from repository data returned by GitHub A
 
 ### Dashboard Overview
 
-![alt text](image.png)
-![alt text](image-1.png)
+![Dashboard](image.png)
 
-### Developer Analytics
+### Profile & Analytics
 
-![alt text](image-2.png)
+![Analytics](image-1.png)
+
+### Language Distribution
+
+![Language Chart](image-2.png)
 
 ### Repository Explorer
 
-![alt text](image-3.png)
+![Repository Explorer](image-3.png)
 
 ---
 
@@ -183,8 +200,8 @@ These metrics are computed dynamically from repository data returned by GitHub A
 ### Clone Repository
 
 ```bash
-git clone <https://github.com/Mayank1343/github-repo-explorer.git>
-cd github-developer-dashboard
+git clone https://github.com/Mayank1343/github-repo-explorer.git
+cd github-repo-explorer
 ```
 
 ### Backend Setup
@@ -203,13 +220,93 @@ npm install
 npm run dev
 ```
 
-### Environment Variables
+---
 
-Create a `.env` file inside the backend directory:
+## Environment Variables
+
+### Backend
+
+Create:
+
+```text
+server/.env
+```
 
 ```env
 PORT=5000
+GITHUB_TOKEN=your_github_personal_access_token
 ```
+
+### Frontend
+
+Create:
+
+```text
+client/.env
+```
+
+```env
+VITE_API_URL=http://localhost:5000/api/github
+```
+
+---
+
+## Production Deployment
+
+### Frontend
+
+Hosted on Vercel
+
+### Backend
+
+Hosted on Render
+
+### Note
+
+The backend runs on Render's free tier. The first request after inactivity may take a few seconds while the server wakes up.
+
+---
+
+## Challenges Solved
+
+### GitHub API Rate Limiting
+
+Implemented GitHub Personal Access Token authentication to increase API request limits from:
+
+```text
+60 requests/hour
+```
+
+to
+
+```text
+5000 requests/hour
+```
+
+### Faster Response Times
+
+Implemented server-side caching to reduce redundant GitHub API requests and improve response times.
+
+### Production Deployment
+
+Configured environment-based API endpoints and deployed the application using Vercel and Render.
+
+---
+
+## Learning Outcomes
+
+This project strengthened practical understanding of:
+
+* Full-Stack Application Development
+* REST API Integration
+* Backend Service Architecture
+* Caching Strategies
+* Environment Configuration
+* Data Transformation
+* State Management
+* Data Visualization
+* Deployment Workflows
+* Production Debugging
 
 ---
 
@@ -217,32 +314,23 @@ PORT=5000
 
 * GitHub OAuth Authentication
 * Repository Comparison Tool
-* Advanced Repository Analytics
 * Contribution Activity Tracking
-
----
-
-## Learning Outcomes
-
-This project strengthened understanding of:
-
-* REST API Integration
-* Backend Architecture
-* Data Transformation
-* Caching Strategies
-* State Management
-* Component-Based Design
-* Data Visualization
-* Responsive UI Development
+* Advanced Developer Insights
+* Repository Trend Analysis
 
 ---
 
 ## Author
 
-Mayank Sharma
+**Mayank Sharma**
 
 B.Tech Computer Science Engineering
 Graphic Era Hill University
 
 GitHub: https://github.com/Mayank1343
+
 LinkedIn: https://www.linkedin.com/in/mayanksharmaa13/
+
+---
+
+⭐ If you found this project interesting, consider giving it a star.
