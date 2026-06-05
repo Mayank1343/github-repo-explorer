@@ -1,17 +1,19 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-import SearchBar from "../components/SearchBar";
 import ProfileCard from "../components/ProfileCard";
 import StatsCards from "../components/StatsCards";
+import RepoList from "../components/RepoList";
+import DeveloperAnalytics from "../components/DeveloperAnalytics";
 
 import { fetchGithubUser } from "../services/githubService";
-import DeveloperInsights from "../components/DeveloperInsights";
-import RepoList from "../components/RepoList";
 
 function Home() {
   const [data, setData] = useState(null);
 
-  const handleSearch = async (username) => {
+  const [username, setUsername] =
+    useState("torvalds");
+
+  const handleSearch = async () => {
     try {
       const result =
         await fetchGithubUser(username);
@@ -22,30 +24,58 @@ function Home() {
     }
   };
 
-  return (
-    <div className="max-w-6xl mx-auto p-6">
-      <h1 className="text-4xl font-bold mb-6">
-        GitHub Developer Insights
-      </h1>
+  useEffect(() => {
+    handleSearch();
+  }, []);
 
-      <SearchBar onSearch={handleSearch} />
+  return (
+    <div>
+
+      {/* Header */}
+
+<div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6 mb-6">
+
+  <h1 className="text-[42px] font-bold whitespace-nowrap">
+  GitHub Developer Dashboard
+  </h1>
+
+  <div className="flex gap-2">
+    <input
+      type="text"
+      placeholder="Search GitHub username..."
+      value={username}
+      onChange={(e) => setUsername(e.target.value)}
+      className="border rounded-lg px-4 py-2 w-80"
+    />
+
+    <button
+      onClick={handleSearch}
+      className="bg-black text-white px-6 py-2 rounded-lg"
+    >
+      Search
+    </button>
+  </div>
+
+</div>
 
       {data && (
         <>
-          <div className="mt-8">
-            <ProfileCard
-              profile={data.profile}
-            />
-          </div>
+          <ProfileCard
+            profile={data.profile}
+          />
 
           <StatsCards
             profile={data.profile}
             repos={data.repos}
           />
 
-          <DeveloperInsights repos={data.repos} />
+          <DeveloperAnalytics
+            repos={data.repos}
+          />
 
-          <RepoList repos={data.repos} />
+          <RepoList
+            repos={data.repos}
+          />
         </>
       )}
     </div>

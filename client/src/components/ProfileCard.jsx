@@ -2,7 +2,7 @@ function ProfileCard({ profile }) {
   if (!profile) return null;
 
   return (
-    <div className="bg-white rounded-xl shadow-md p-6 flex gap-6 items-center">
+    <div className="bg-white rounded-xl shadow-md p-4 flex gap-6 items-center">
       <img
         src={profile.avatar}
         alt={profile.name}

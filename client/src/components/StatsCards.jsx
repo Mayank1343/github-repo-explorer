@@ -11,26 +11,39 @@ function StatsCards({ profile, repos }) {
     (sum, repo) => sum + repo.stars,
     0
   );
+  
 
   return (
     <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-6">
       <div className="bg-white p-4 rounded-xl shadow">
         <h3 className="text-sm text-gray-500">
-          Repositories
+            Owned Repositories
         </h3>
+
         <p className="text-2xl font-bold">
-          {profile.publicRepos}
+            {
+            repos.filter(
+                (repo) => !repo.fork
+            ).length
+            }
         </p>
-      </div>
+        </div>
 
       <div className="bg-white p-4 rounded-xl shadow">
         <h3 className="text-sm text-gray-500">
-          Followers
+            Total Forks
         </h3>
+
         <p className="text-2xl font-bold">
-          {profile.followers}
+            {
+            repos.reduce(
+                (sum, repo) =>
+                sum + repo.forks,
+                0
+            )
+            }
         </p>
-      </div>
+        </div>
 
       <div className="bg-white p-4 rounded-xl shadow">
         <h3 className="text-sm text-gray-500">
