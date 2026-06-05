@@ -157,6 +157,7 @@ github-repo-explorer/
 │   └── package.json
 │
 └── README.md
+```
 
 ---
 
@@ -179,19 +180,19 @@ The dashboard derives several metrics directly from GitHub repository data:
 
 ### Dashboard Overview
 
-![Dashboard](image.png)
+![Dashboard](https://raw.githubusercontent.com/Mayank1343/github-repo-explorer/main/image.png)
 
 ### Profile & Analytics
 
-![Analytics](image-1.png)
+![Analytics](https://raw.githubusercontent.com/Mayank1343/github-repo-explorer/main/image-1.png)
 
 ### Language Distribution
 
-![Language Chart](image-2.png)
+![Language Chart](https://raw.githubusercontent.com/Mayank1343/github-repo-explorer/main/image-2.png)
 
 ### Repository Explorer
 
-![Repository Explorer](image-3.png)
+![Repository Explorer](https://raw.githubusercontent.com/Mayank1343/github-repo-explorer/main/image-3.png)
 
 ---
 
