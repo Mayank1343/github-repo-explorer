@@ -122,11 +122,18 @@ function Home() {
       loading && (
         <div className="fixed inset-0 flex items-center justify-center bg-black/40 backdrop-blur-sm z-50">
           <div className="flex flex-col items-center gap-4">
-            <FaSpinner className="animate-spin text-5xl text-green-500" />
+            <div className="fixed inset-0 flex flex-col items-center justify-center bg-[#020817] z-50">
+            <FaSpinner className="animate-spin text-5xl text-green-500 mb-6" />
 
-            <p className="text-white text-lg">
-              Loading developer data...
+            <h2 className="text-2xl font-semibold text-white">
+              Waking up the server...
+            </h2>
+
+            <p className="text-gray-400 mt-3 text-center max-w-md px-4">
+              Our backend is hosted on Render's free tier and may need a few seconds
+              to start after inactivity. Thanks for your patience.
             </p>
+          </div>
           </div>
         </div>
       )
