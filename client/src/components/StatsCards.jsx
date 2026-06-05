@@ -15,7 +15,7 @@ function StatsCards({ profile, repos }) {
 
   return (
     <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-6">
-      <div className="bg-white p-4 rounded-xl shadow">
+      <div className="bg-[#161b22] border border-[#30363d] p-4 rounded-xl shadow">
         <h3 className="text-sm text-gray-500">
             Owned Repositories
         </h3>
@@ -29,7 +29,7 @@ function StatsCards({ profile, repos }) {
         </p>
         </div>
 
-      <div className="bg-white p-4 rounded-xl shadow">
+      <div className="bg-[#161b22] border border-[#30363d] p-4 rounded-xl shadow">
         <h3 className="text-sm text-gray-500">
             Total Forks
         </h3>
@@ -45,7 +45,7 @@ function StatsCards({ profile, repos }) {
         </p>
         </div>
 
-      <div className="bg-white p-4 rounded-xl shadow">
+      <div className="bg-[#161b22] border border-[#30363d] p-4 rounded-xl shadow">
         <h3 className="text-sm text-gray-500">
           Total Stars
         </h3>
@@ -54,7 +54,7 @@ function StatsCards({ profile, repos }) {
         </p>
       </div>
 
-      <div className="bg-white p-4 rounded-xl shadow">
+      <div className="bg-[#161b22] border border-[#30363d] p-4 rounded-xl shadow">
         <h3 className="text-sm text-gray-500">
           Languages
         </h3>

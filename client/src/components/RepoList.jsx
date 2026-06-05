@@ -86,7 +86,15 @@ function RepoList({ repos }) {
               e.target.value
             )
           }
-          className="border p-3 rounded-lg"
+          className="
+        bg-[#161b22]
+        border border-[#30363d]
+        text-white
+        rounded-lg
+        px-4 py-2
+        focus:outline-none
+        focus:border-blue-500
+        "
         >
           <option value="stars">
             Sort by Stars
@@ -103,7 +111,7 @@ function RepoList({ repos }) {
       </div>
 
       {filteredRepos.length === 0 ? (
-        <div className="bg-white rounded-xl shadow-md p-6 hover:shadow-lg transition h-full">
+        <div className="bg-[#161b22] border border-[#30363d] rounded-xl shadow-md p-6 hover:shadow-lg transition h-full">
             <p className="text-gray-500">
             No repositories found.
             </p>

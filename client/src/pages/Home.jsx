@@ -108,9 +108,31 @@ function Home() {
 
 
   return (
-    <div>
+  <div>
 
-      {/* Header */}
+    {
+      error && (
+        <div className="bg-red-100 border border-red-300 text-red-700 px-4 py-3 rounded-lg mb-6">
+          {error}
+        </div>
+      )
+    }
+
+    {
+      loading && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black/40 backdrop-blur-sm z-50">
+          <div className="flex flex-col items-center gap-4">
+            <FaSpinner className="animate-spin text-5xl text-green-500" />
+
+            <p className="text-white text-lg">
+              Loading developer data...
+            </p>
+          </div>
+        </div>
+      )
+    }
+
+    {/* Header */}
 
       {
         error && (
@@ -149,12 +171,20 @@ function Home() {
           handleSearch();
         }
       }}
-      className="border rounded-lg px-4 py-2 w-80"
-    />
+      className="
+      bg-[#161b22]
+      border border-[#30363d]
+      text-white
+      rounded-lg
+      px-4 py-2
+      w-80
+      focus:outline-none
+      focus:border-blue-500
+      "/>
     {
       showRecent &&
       recentSearches.length > 0 && (
-        <div className="absolute top-12 left-0 w-80 bg-white border rounded-lg shadow-lg z-50">
+        <div className="absolute top-12 left-0 w-80 bg-[#161b22] border border-[#30363d] border rounded-lg shadow-lg z-50">
           
           <div className="px-4 py-2 text-xs text-gray-500 border-b">
             Recent Searches
@@ -166,7 +196,7 @@ function Home() {
               onClick={() =>
                 handleRecentSearch(item)
               }
-              className="block w-full text-left px-4 py-2 hover:bg-gray-100"
+              className="block w-full text-left px-4 py-2 hover:bg-[#21262d]"
             >
               {item}
             </button>
@@ -178,7 +208,7 @@ function Home() {
     <button
       onClick={() => handleSearch()}
       disabled={loading}
-      className="bg-black text-white px-6 py-2 rounded-lg flex items-center gap-2 disabled:opacity-50"
+      className="bg-[#238636] hover:bg-[#2ea043] text-white px-6 py-2 rounded-lg flex items-center gap-2 disabled:opacity-50"
     >
       {loading ? (
         <>
@@ -194,7 +224,7 @@ function Home() {
 </div>
 
       {!loading && !data && (
-          <div className="bg-white rounded-xl shadow-md p-12 text-center mt-8">
+          <div className="bg-[#161b22] border border-[#30363d] rounded-xl shadow-md p-12 text-center mt-8">
             <h2 className="text-2xl font-bold mb-2">
               Search a GitHub Developer
             </h2>

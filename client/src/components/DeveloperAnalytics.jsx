@@ -65,7 +65,7 @@ function DeveloperAnalytics({ repos }) {
   ];
 
   return (
-    <div className="bg-white rounded-xl shadow-md p-6 mt-6">
+    <div className="bg-[#161b22] border border-[#30363d] rounded-xl shadow-md p-6 mt-6">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
 
         {/* LEFT SIDE */}
@@ -81,7 +81,7 @@ function DeveloperAnalytics({ repos }) {
 
         <div className="grid grid-cols-2 gap-4">
 
-        <div className="bg-gray-50 rounded-lg p-4">
+        <div className="bg-[#0d1117] border border-[#30363d] rounded-lg p-4">
             <p className="text-sm text-gray-500">
             Primary Language
             </p>
@@ -91,7 +91,7 @@ function DeveloperAnalytics({ repos }) {
             </p>
         </div>
 
-        <div className="bg-gray-50 rounded-lg p-4">
+        <div className="bg-[#0d1117] border border-[#30363d] rounded-lg p-4">
             <p className="text-sm text-gray-500">
             Most Starred Repository
             </p>
@@ -101,7 +101,7 @@ function DeveloperAnalytics({ repos }) {
             </p>
         </div>
 
-        <div className="bg-gray-50 rounded-lg p-4 col-span-2">
+        <div className="bg-[#0d1117] border border-[#30363d] rounded-lg p-4 col-span-2">
             <p className="text-sm text-gray-500">
             Recently Updated Repository
             </p>

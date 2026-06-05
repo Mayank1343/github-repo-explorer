@@ -5,7 +5,7 @@ function RepoCard({ repo }) {
     useState(false);
 
   return (
-    <div className="bg-white rounded-xl shadow-md p-5 h-full hover:shadow-lg transition-shadow">
+    <div className="bg-[#161b22] border border-[#30363d] rounded-xl shadow-md p-5 h-full flex flex-col hover:shadow-lg transition-shadow">
       
       {/* Repository Name + Language */}
       <div className="flex items-center gap-3 mb-2">
@@ -13,19 +13,19 @@ function RepoCard({ repo }) {
           {repo.name}
         </h3>
 
-        <span className="text-sm bg-blue-100 text-blue-700 px-3 py-1 rounded-full font-medium whitespace-nowrap">
+        <span className="text-smbg-blue-500/15 text-blue-400 border border-blue-500/20 px-3 py-1 rounded-full font-medium whitespace-nowrap">
           {repo.language || "Unknown"}
         </span>
       </div>
 
       {/* Description */}
-      <p className="text-gray-600 mb-4">
+      <p className="text-gray-400 mb-4 flex-grow">
         {repo.description ||
           "No description available"}
       </p>
 
       {/* Stats */}
-      <div className="flex gap-6 text-sm text-gray-600">
+      <div className="flex gap-6 text-sm text-gray-400">
         <span>
           ⭐ Stars: {repo.stars}
         </span>
