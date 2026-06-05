@@ -5,36 +5,40 @@ function RepoCard({ repo }) {
     useState(false);
 
   return (
-    <div className="bg-white rounded-xl shadow-md p-5">
-      <div className="flex justify-between items-start">
-        <div>
-          <h3 className="font-bold text-xl">
-            {repo.name}
-          </h3>
+    <div className="bg-white rounded-xl shadow-md p-5 h-full hover:shadow-lg transition-shadow">
+      
+      {/* Repository Name + Language */}
+      <div className="flex items-center gap-3 mb-2">
+        <h3 className="font-bold text-xl break-words">
+          {repo.name}
+        </h3>
 
-          <p className="text-gray-600 mt-2">
-            {repo.description ||
-              "No description available"}
-          </p>
-        </div>
-
-        <span className="text-sm bg-blue-100 text-blue-700 px-3 py-1 rounded-full font-medium">
+        <span className="text-sm bg-blue-100 text-blue-700 px-3 py-1 rounded-full font-medium whitespace-nowrap">
           {repo.language || "Unknown"}
         </span>
       </div>
 
-      <div className="flex gap-6 mt-4 text-sm text-gray-600">
-        <span>⭐ Stars: {repo.stars}</span>
+      {/* Description */}
+      <p className="text-gray-600 mb-4">
+        {repo.description ||
+          "No description available"}
+      </p>
+
+      {/* Stats */}
+      <div className="flex gap-6 text-sm text-gray-600">
+        <span>
+          ⭐ Stars: {repo.stars}
+        </span>
 
         <span>
-          Updated:
-          {" "}
+          Updated{" "}
           {new Date(
             repo.updatedAt
           ).toLocaleDateString()}
         </span>
       </div>
 
+      {/* Expand Button */}
       <button
         onClick={() =>
           setExpanded(!expanded)
@@ -46,17 +50,16 @@ function RepoCard({ repo }) {
           : "View Details"}
       </button>
 
+      {/* Expanded Section */}
       {expanded && (
         <div className="mt-4 border-t pt-4 text-sm">
           <p>
-            Open Issues:
-            {" "}
+            Open Issues:{" "}
             {repo.openIssues}
           </p>
 
           <p>
-            Default Branch:
-            {" "}
+            Default Branch:{" "}
             {repo.defaultBranch}
           </p>
 

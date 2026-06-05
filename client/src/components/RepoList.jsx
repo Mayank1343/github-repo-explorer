@@ -103,21 +103,19 @@ function RepoList({ repos }) {
       </div>
 
       {filteredRepos.length === 0 ? (
-        <div className="bg-white rounded-xl shadow-md p-8 text-center">
+        <div className="bg-white rounded-xl shadow-md p-6 hover:shadow-lg transition h-full">
             <p className="text-gray-500">
             No repositories found.
             </p>
         </div>
       ) : (
-        <div className="grid gap-4">
-          {filteredRepos.map(
-            (repo) => (
-              <RepoCard
-                key={repo.id}
-                repo={repo}
-              />
-            )
-          )}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        {filteredRepos.map((repo) => (
+            <RepoCard
+            key={repo.id}
+            repo={repo}
+            />
+        ))}
         </div>
       )}
     </div>

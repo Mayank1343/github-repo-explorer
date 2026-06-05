@@ -6,32 +6,120 @@ import RepoList from "../components/RepoList";
 import DeveloperAnalytics from "../components/DeveloperAnalytics";
 
 import { fetchGithubUser } from "../services/githubService";
+import { FaSpinner } from "react-icons/fa";
 
 function Home() {
   const [data, setData] = useState(null);
 
   const [username, setUsername] =
-    useState("torvalds");
+    useState("");
 
-  const handleSearch = async () => {
+  const handleSearch = async (
+    searchUsername = username
+  ) => {
+
+    searchUsername =
+      String(searchUsername);
+
+    if (!searchUsername.trim()) {
+      setError(
+        "Please enter a GitHub username."
+      );
+      return;
+    }
     try {
+      setLoading(true);
+      setError("");
+
       const result =
-        await fetchGithubUser(username);
+        await fetchGithubUser(searchUsername);
 
       setData(result);
+            const updatedSearches = [
+        searchUsername,
+        ...recentSearches.filter(
+          (item) =>
+            item !== searchUsername
+        ),
+      ].slice(0, 5);
+
+      setRecentSearches(updatedSearches);
+
+      localStorage.setItem(
+        "recentSearches",
+        JSON.stringify(updatedSearches)
+      );
     } catch (error) {
-      console.error(error);
+      setData(null);
+
+      if (
+        error.response?.status === 404
+      ) {
+        setError(
+          "GitHub user not found."
+        );
+      } else {
+        setError(
+          "Something went wrong. Please try again."
+        );
+      }
+    } finally {
+      setLoading(false);
     }
   };
 
+  const handleRecentSearch = (
+  selectedUser
+) => {
+  console.log(
+    "Recent clicked:",
+    selectedUser
+  );
+
+  setUsername(selectedUser);
+
+  handleSearch(selectedUser);
+
+  setShowRecent(false);
+};
+    
+
+  const [loading, setLoading] = useState(false);
+
+  const [error, setError] =
+  useState("");
+
+  const [recentSearches, setRecentSearches] =
+  useState([]);
+
+  const [showRecent, setShowRecent] =
+  useState(false);
+  
   useEffect(() => {
-    handleSearch();
+    const saved =
+      JSON.parse(
+        localStorage.getItem(
+          "recentSearches"
+        )
+      ) || [];
+
+    setRecentSearches(saved);
   }, []);
+
 
   return (
     <div>
 
       {/* Header */}
+
+      {
+        error && (
+          <div className="bg-red-100 border border-red-300 text-red-700 px-4 py-3 rounded-lg mb-6">
+            {error}
+          </div>
+        )
+      }
+
 
 <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6 mb-6">
 
@@ -39,26 +127,86 @@ function Home() {
   GitHub Developer Dashboard
   </h1>
 
-  <div className="flex gap-2">
+  <div className="flex gap-2 relative">
     <input
       type="text"
       placeholder="Search GitHub username..."
       value={username}
-      onChange={(e) => setUsername(e.target.value)}
+      onChange={(e) =>
+        setUsername(e.target.value)
+      }
+      onFocus={() =>
+        setShowRecent(true)
+      }
+      onBlur={() =>
+        setTimeout(
+          () => setShowRecent(false),
+          250
+        )
+      }
+      onKeyDown={(e) => {
+        if (e.key === "Enter") {
+          handleSearch();
+        }
+      }}
       className="border rounded-lg px-4 py-2 w-80"
     />
+    {
+      showRecent &&
+      recentSearches.length > 0 && (
+        <div className="absolute top-12 left-0 w-80 bg-white border rounded-lg shadow-lg z-50">
+          
+          <div className="px-4 py-2 text-xs text-gray-500 border-b">
+            Recent Searches
+          </div>
+
+          {recentSearches.map((item) => (
+            <button
+              key={item}
+              onClick={() =>
+                handleRecentSearch(item)
+              }
+              className="block w-full text-left px-4 py-2 hover:bg-gray-100"
+            >
+              {item}
+            </button>
+          ))}
+        </div>
+      )
+    }
 
     <button
-      onClick={handleSearch}
-      className="bg-black text-white px-6 py-2 rounded-lg"
+      onClick={() => handleSearch()}
+      disabled={loading}
+      className="bg-black text-white px-6 py-2 rounded-lg flex items-center gap-2 disabled:opacity-50"
     >
-      Search
+      {loading ? (
+        <>
+          <FaSpinner className="animate-spin" />
+          Loading...
+        </>
+      ) : (
+        "Search"
+      )}
     </button>
   </div>
 
 </div>
 
-      {data && (
+      {!loading && !data && (
+          <div className="bg-white rounded-xl shadow-md p-12 text-center mt-8">
+            <h2 className="text-2xl font-bold mb-2">
+              Search a GitHub Developer
+            </h2>
+
+            <p className="text-gray-500">
+              Enter a GitHub username above to view
+              profile insights and repository analytics.
+            </p>
+          </div>
+        )}
+
+      {!loading && data && (
         <>
           <ProfileCard
             profile={data.profile}
