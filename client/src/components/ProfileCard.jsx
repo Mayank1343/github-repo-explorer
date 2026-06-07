@@ -2,7 +2,7 @@ function ProfileCard({ profile }) {
   if (!profile) return null;
 
   return (
-    <div className="bg-[#161b22] border border-[#30363d] rounded-xl shadow-md p-4 flex gap-6 items-center">
+    <div className="bg-[#161b22] border border-[#30363d] rounded-xl shadow-md p-4 flex flex-col sm:flex-row gap-6 items-center sm:items-start">
       <img
         src={profile.avatar}
         alt={profile.name}
@@ -18,7 +18,14 @@ function ProfileCard({ profile }) {
           {profile.bio || "No bio available"}
         </p>
 
-        <div className="flex gap-6 mt-4">
+        <div className="
+          flex
+          justify-center
+          sm:justify-start
+          gap-6
+          mt-4
+          flex-wrap
+        ">
           <div>
             <span className="font-bold">
               {profile.followers}

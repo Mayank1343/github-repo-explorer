@@ -66,7 +66,7 @@ function RepoList({ repos }) {
         Showing {filteredRepos.length} repositories
         </p>
         </div>
-      <div className="flex flex-col md:flex-row gap-4 mb-6">
+      <div className="flex flex-col lg:flex-row gap-4 mb-6">
         <input
           type="text"
           placeholder="Search repository..."
@@ -76,8 +76,7 @@ function RepoList({ repos }) {
               e.target.value
             )
           }
-          className="border p-3 rounded-lg flex-1"
-        />
+          className="bg-[#161b22] border border-[#30363d] text-white p-3 rounded-lg flex-1 w-full"/>
 
         <select
           value={sortBy}
@@ -87,14 +86,16 @@ function RepoList({ repos }) {
             )
           }
           className="
-        bg-[#161b22]
-        border border-[#30363d]
-        text-white
-        rounded-lg
-        px-4 py-2
-        focus:outline-none
-        focus:border-blue-500
-        "
+          bg-[#161b22]
+          border border-[#30363d]
+          text-white
+          rounded-lg
+          px-4 py-3
+          w-full
+          lg:w-auto
+          focus:outline-none
+          focus:border-blue-500
+          "
         >
           <option value="stars">
             Sort by Stars

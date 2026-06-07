@@ -20,6 +20,11 @@ const fetchGithubUser = async (
 
     console.log("Fetching from GitHub API");
 
+    console.log(
+  "TOKEN:",
+  process.env.GITHUB_TOKEN
+);
+
     const headers = {
       Authorization: `token ${process.env.GITHUB_TOKEN}`,
     };

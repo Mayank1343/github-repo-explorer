@@ -107,8 +107,8 @@ function Home() {
   }, []);
 
 
-  return (
-  <div>
+return (
+  <div className="max-w-7xl mx-auto px-4 md:px-6">
 
     {
       error && (
@@ -119,44 +119,33 @@ function Home() {
     }
 
     {
-      loading && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black/40 backdrop-blur-sm z-50">
-          <div className="flex flex-col items-center gap-4">
-            <div className="fixed inset-0 flex flex-col items-center justify-center bg-[#020817] z-50">
-            <FaSpinner className="animate-spin text-5xl text-green-500 mb-6" />
+  loading && (
+    <div className="fixed inset-0 flex flex-col items-center justify-center bg-[#020817] z-50">
+      <FaSpinner className="animate-spin text-5xl text-green-500 mb-6" />
 
-            <h2 className="text-2xl font-semibold text-white">
-              Waking up the server...
-            </h2>
+      <h2 className="text-2xl font-semibold text-white">
+        Fetching User Profile...
+      </h2>
 
-            <p className="text-gray-400 mt-3 text-center max-w-md px-4">
-              Our backend is hosted on Render's free tier and may need a few seconds
-              to start after inactivity. Thanks for your patience.
-            </p>
-          </div>
-          </div>
-        </div>
-      )
-    }
+      <p className="text-gray-400 mt-3 text-center max-w-md px-4">
+        Our backend is hosted on Render's free tier and may need a few seconds
+        to start after inactivity. Thanks for your patience.
+      </p>
+    </div>
+  )
+}
 
     {/* Header */}
-
-      {
-        error && (
-          <div className="bg-red-100 border border-red-300 text-red-700 px-4 py-3 rounded-lg mb-6">
-            {error}
-          </div>
-        )
-      }
 
 
 <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6 mb-6">
 
-  <h1 className="text-[42px] font-bold whitespace-nowrap">
-  GitHub Developer Dashboard
+  <h1 className="text-4xl md:text-5xl font-bold">
+    GitHub Developer Dashboard
   </h1>
 
-  <div className="flex gap-2 relative">
+  <div
+    className="flex flex-col sm:flex-row gap-2 relative w-full lg:w-auto">
     <input
       type="text"
       placeholder="Search GitHub username..."
@@ -178,22 +167,15 @@ function Home() {
           handleSearch();
         }
       }}
-      className="
-      bg-[#161b22]
-      border border-[#30363d]
-      text-white
-      rounded-lg
-      px-4 py-2
-      w-80
-      focus:outline-none
-      focus:border-blue-500
-      "/>
-    {
-      showRecent &&
+      className="bg-[#161b22] border border-[#30363d] text-white rounded-lg 
+      px-4 py-2 w-full sm:w-80 focus:outline-none focus:border-blue-500"/>
+
+    {showRecent &&
       recentSearches.length > 0 && (
-        <div className="absolute top-12 left-0 w-80 bg-[#161b22] border border-[#30363d] border rounded-lg shadow-lg z-50">
-          
-          <div className="px-4 py-2 text-xs text-gray-500 border-b">
+        <div
+          className="absolute top-12 left-0 w-full sm:w-80 bg-[#161b22] border border-[#30363d]
+            rounded-lg shadow-lg z-50">
+          <div className="px-4 py-2 text-xs text-gray-500 border-b border-[#30363d]">
             Recent Searches
           </div>
 
@@ -203,19 +185,30 @@ function Home() {
               onClick={() =>
                 handleRecentSearch(item)
               }
-              className="block w-full text-left px-4 py-2 hover:bg-[#21262d]"
-            >
+              className="block w-full text-left px-4 py-2 hover:bg-[#21262d]">
               {item}
             </button>
           ))}
         </div>
-      )
-    }
+      )}
 
     <button
       onClick={() => handleSearch()}
       disabled={loading}
-      className="bg-[#238636] hover:bg-[#2ea043] text-white px-6 py-2 rounded-lg flex items-center gap-2 disabled:opacity-50"
+      className="
+        bg-[#238636]
+        hover:bg-[#2ea043]
+        text-white
+        px-6 py-2
+        rounded-lg
+        flex
+        items-center
+        justify-center
+        gap-2
+        disabled:opacity-50
+        w-full
+        sm:w-auto
+      "
     >
       {loading ? (
         <>
@@ -227,8 +220,7 @@ function Home() {
       )}
     </button>
   </div>
-
-</div>
+  </div>
 
       {!loading && !data && (
           <div className="bg-[#161b22] border border-[#30363d] rounded-xl shadow-md p-12 text-center mt-8">

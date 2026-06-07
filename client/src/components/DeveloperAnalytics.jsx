@@ -4,6 +4,7 @@ import {
   Cell,
   Tooltip,
   ResponsiveContainer,
+  Legend,
 } from "recharts";
 
 function DeveloperAnalytics({ repos }) {
@@ -50,8 +51,8 @@ function DeveloperAnalytics({ repos }) {
   repos.length > 0
     ? [...repos].sort(
         (a, b) =>
-          new Date(b.updated_at) -
-          new Date(a.updated_at)
+          new Date(b.updatedAt) -
+          new Date(a.updatedAt)
       )[0].name
     : "N/A";
 
@@ -66,7 +67,7 @@ function DeveloperAnalytics({ repos }) {
 
   return (
     <div className="bg-[#161b22] border border-[#30363d] rounded-xl shadow-md p-6 mt-6">
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+      <div className="grid grid-cols-1 xl:grid-cols-2 gap-8 items-start">
 
         {/* LEFT SIDE */}
         <div>
@@ -79,15 +80,15 @@ function DeveloperAnalytics({ repos }) {
             Insights generated from public repositories
         </p>
 
-        <div className="grid grid-cols-2 gap-4">
+        <div className="flex flex-col gap-4">
 
-        <div className="bg-[#0d1117] border border-[#30363d] rounded-lg p-4">
+        <div className="bg-[#0d1117] border border-[#30363d] rounded-lg p-4 min-w-0">
             <p className="text-sm text-gray-500">
             Primary Language
             </p>
 
-            <p className="text-xl font-bold">
-            {primaryLanguage}
+            <p className="text-xl font-bold break-words">
+              {primaryLanguage}
             </p>
         </div>
 
@@ -96,8 +97,8 @@ function DeveloperAnalytics({ repos }) {
             Most Starred Repository
             </p>
 
-            <p className="text-lg font-bold break-all">
-            {mostStarredRepo}
+            <p className="text-lg font-bold break-words">
+              {mostStarredRepo}
             </p>
         </div>
 
@@ -107,7 +108,7 @@ function DeveloperAnalytics({ repos }) {
             </p>
 
             <p className="text-xl font-bold break-words">
-            {recentlyUpdatedRepo}
+              {recentlyUpdatedRepo}
             </p>
         </div>
 
@@ -117,42 +118,32 @@ function DeveloperAnalytics({ repos }) {
         {/* RIGHT SIDE */}
         <div>
 
-          <div className="h-72 -mt-6">
+          <div className="w-full h-[300px] flex items-center justify-center">
             <ResponsiveContainer
               width="100%"
               height="100%"
             >
               <PieChart>
-                <Pie
-                  data={chartData}
-                  dataKey="count"
-                  nameKey="language"
-                  cx="50%"
-                  cy="50%"
-                  outerRadius={80}
-                  label={({ language, percent }) =>
-                    `${language} ${(
-                      percent * 100
-                    ).toFixed(0)}%`
-                  }
-                >
-                  {chartData.map(
-                    (_, index) => (
-                      <Cell
-                        key={index}
-                        fill={
-                          COLORS[
-                            index %
-                              COLORS.length
-                          ]
-                        }
-                      />
-                    )
-                  )}
-                </Pie>
+              <Pie
+                data={chartData}
+                dataKey="count"
+                nameKey="language"
+                outerRadius={100}
+              >
+                {chartData.map((_, index) => (
+                  <Cell
+                    key={index}
+                    fill={
+                      COLORS[index % COLORS.length]
+                    }
+                  />
+                ))}
+              </Pie>
 
-                <Tooltip />
-              </PieChart>
+              <Tooltip />
+
+              <Legend />
+            </PieChart>
             </ResponsiveContainer>
           </div>
 

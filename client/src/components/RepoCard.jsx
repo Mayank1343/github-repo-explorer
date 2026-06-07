@@ -8,12 +8,36 @@ function RepoCard({ repo }) {
     <div className="bg-[#161b22] border border-[#30363d] rounded-xl shadow-md p-5 h-full flex flex-col hover:shadow-lg transition-shadow">
       
       {/* Repository Name + Language */}
-      <div className="flex items-center gap-3 mb-2">
-        <h3 className="font-bold text-xl break-words">
+      <div className="
+        flex
+        flex-col
+        sm:flex-row
+        sm:items-center
+        gap-2
+        mb-2
+      ">
+        <h3 className="
+          font-bold
+          text-lg
+          sm:text-xl
+          break-all
+        ">
           {repo.name}
         </h3>
 
-        <span className="text-smbg-blue-500/15 text-blue-400 border border-blue-500/20 px-3 py-1 rounded-full font-medium whitespace-nowrap">
+        <span
+          className="
+            text-sm
+            bg-blue-500/15
+            text-blue-400
+            border border-blue-500/20
+            px-3 py-1
+            rounded-full
+            font-medium
+            whitespace-nowrap
+            self-start
+          "
+        >
           {repo.language || "Unknown"}
         </span>
       </div>
@@ -25,7 +49,7 @@ function RepoCard({ repo }) {
       </p>
 
       {/* Stats */}
-      <div className="flex gap-6 text-sm text-gray-400">
+      <div className="flex flex-col sm:flex-row gap-2 sm:gap-6 text-sm text-gray-400">
         <span>
           ⭐ Stars: {repo.stars}
         </span>
@@ -52,7 +76,7 @@ function RepoCard({ repo }) {
 
       {/* Expanded Section */}
       {expanded && (
-        <div className="mt-4 border-t pt-4 text-sm">
+        <div className="mt-4 border-t border-[#30363d] pt-4 text-sm break-words">
           <p>
             Open Issues:{" "}
             {repo.openIssues}
@@ -67,7 +91,7 @@ function RepoCard({ repo }) {
             href={repo.repoUrl}
             target="_blank"
             rel="noreferrer"
-            className="text-blue-600"
+            className="text-blue-400 break-all"
           >
             View on GitHub
           </a>

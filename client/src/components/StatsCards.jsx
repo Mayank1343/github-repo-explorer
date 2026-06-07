@@ -11,57 +11,63 @@ function StatsCards({ profile, repos }) {
     (sum, repo) => sum + repo.stars,
     0
   );
-  
+
+  const totalForks = repos.reduce(
+    (sum, repo) => sum + repo.forks,
+    0
+  );
+
+  const ownedRepos = repos.filter(
+    (repo) => !repo.fork
+  ).length;
 
   return (
-    <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-6">
+    <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4 mt-6">
+
+      {/* Owned Repositories */}
       <div className="bg-[#161b22] border border-[#30363d] p-4 rounded-xl shadow">
         <h3 className="text-sm text-gray-500">
-            Owned Repositories
+          Owned Repositories
         </h3>
 
-        <p className="text-2xl font-bold">
-            {
-            repos.filter(
-                (repo) => !repo.fork
-            ).length
-            }
+        <p className="text-2xl font-bold mt-2">
+          {ownedRepos}
         </p>
-        </div>
+      </div>
 
+      {/* Total Forks */}
       <div className="bg-[#161b22] border border-[#30363d] p-4 rounded-xl shadow">
         <h3 className="text-sm text-gray-500">
-            Total Forks
+          Total Forks
         </h3>
 
-        <p className="text-2xl font-bold">
-            {
-            repos.reduce(
-                (sum, repo) =>
-                sum + repo.forks,
-                0
-            )
-            }
+        <p className="text-2xl font-bold mt-2">
+          {totalForks}
         </p>
-        </div>
+      </div>
 
+      {/* Total Stars */}
       <div className="bg-[#161b22] border border-[#30363d] p-4 rounded-xl shadow">
         <h3 className="text-sm text-gray-500">
           Total Stars
         </h3>
-        <p className="text-2xl font-bold">
+
+        <p className="text-2xl font-bold mt-2">
           {totalStars}
         </p>
       </div>
 
+      {/* Languages */}
       <div className="bg-[#161b22] border border-[#30363d] p-4 rounded-xl shadow">
         <h3 className="text-sm text-gray-500">
           Languages
         </h3>
-        <p className="text-2xl font-bold">
+
+        <p className="text-2xl font-bold mt-2">
           {languages.size}
         </p>
       </div>
+
     </div>
   );
 }
