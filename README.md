@@ -80,6 +80,27 @@ The project was built to demonstrate practical full-stack engineering concepts i
 
 ---
 
+## Assessment Requirements Coverage
+
+| Requirement | Status |
+|------------|---------|
+| React Frontend | ✅ Implemented |
+| Node.js + Express Backend | ✅ Implemented |
+| GitHub REST API Integration | ✅ Implemented |
+| Developer Profile Dashboard | ✅ Implemented |
+| Repository Explorer | ✅ Implemented |
+| Analytics Dashboard | ✅ Implemented |
+| Data Visualization | ✅ Implemented |
+| Responsive UI | ✅ Implemented |
+| Error Handling | ✅ Implemented |
+| Caching Layer | ✅ Implemented |
+| Environment Configuration | ✅ Implemented |
+| Deployment | ✅ Implemented |
+| README Documentation | ✅ Implemented |
+| API Documentation | ✅ Implemented |
+
+---
+
 ## System Architecture
 
 | Layer | Responsibility |
@@ -89,21 +110,159 @@ The project was built to demonstrate practical full-stack engineering concepts i
 | Cache Service | Reduces redundant GitHub API requests |
 | GitHub REST API | Source of developer and repository data |
 
-### Data Flow
+### Architecture Flow
 
-User Search
-↓
-React Frontend
-↓
-Express Backend
-↓
-Cache Check
-↓
-GitHub API (if cache miss)
-↓
-Processed Response
-↓
-Analytics Dashboard
+```text
+┌─────────────────────┐
+│    React Client     │
+└──────────┬──────────┘
+           │
+           ▼
+┌─────────────────────┐
+│    Express API      │
+└──────────┬──────────┘
+           │
+           ▼
+┌─────────────────────┐
+│    Cache Service    │
+└──────────┬──────────┘
+           │
+           ▼
+┌─────────────────────┐
+│   GitHub REST API   │
+└─────────────────────┘
+```
+
+### Request Flow
+
+1. User enters a GitHub username.
+2. React frontend sends a request to the Express backend.
+3. Backend checks the cache for an existing response.
+4. If cached data exists, it is returned immediately.
+5. Otherwise, the backend fetches data from the GitHub REST API.
+6. Data is transformed into a clean response format.
+7. Response is cached for future requests.
+8. Analytics and visualizations are rendered on the dashboard.
+
+
+## API Documentation
+
+### Base URL
+
+Development
+
+```text
+http://localhost:5000/api/github
+```
+
+Production
+
+```text
+https://github-dashboard-api-zz83.onrender.com/api/github
+```
+
+---
+
+### Get GitHub User Profile & Repositories
+
+**Method**
+
+```http
+GET
+```
+
+**Endpoint**
+
+```http
+/api/github/:username
+```
+
+**Example**
+
+```http
+GET /api/github/mayank1343
+```
+
+**Request Body**
+
+```json
+None
+```
+
+**Success Response (200)**
+
+```json
+{
+  "profile": {
+    "login": "mayank1343",
+    "name": "Mayank Sharma",
+    "avatar": "https://...",
+    "bio": "Software Developer",
+    "followers": 1,
+    "following": 0,
+    "publicRepos": 16
+  },
+  "repos": [
+    {
+      "id": 123,
+      "name": "github-repo-explorer",
+      "description": "GitHub analytics dashboard",
+      "language": "JavaScript",
+      "stars": 5,
+      "forks": 1,
+      "updatedAt": "2026-06-06T12:00:00Z",
+      "openIssues": 0,
+      "defaultBranch": "main",
+      "repoUrl": "https://github.com/..."
+    }
+  ]
+}
+```
+
+**Error Response (404)**
+
+```json
+{
+  "message": "GitHub user not found"
+}
+```
+
+**Error Response (500)**
+
+```json
+{
+  "message": "Internal server error"
+}
+```
+
+### Response Fields
+
+#### Profile Object
+
+| Field | Type | Description |
+|---------|---------|---------|
+| login | string | GitHub username |
+| name | string | Developer name |
+| avatar | string | Profile image URL |
+| bio | string | Developer bio |
+| followers | number | Follower count |
+| following | number | Following count |
+| publicRepos | number | Total public repositories |
+
+#### Repository Object
+
+| Field | Type | Description |
+|---------|---------|---------|
+| id | number | Repository ID |
+| name | string | Repository name |
+| description | string | Repository description |
+| language | string | Primary language |
+| stars | number | Stargazer count |
+| forks | number | Fork count |
+| updatedAt | string | Last update timestamp |
+| openIssues | number | Open issues count |
+| defaultBranch | string | Default branch |
+| repoUrl | string | GitHub repository URL |
 
 ---
 
@@ -111,48 +270,73 @@ Analytics Dashboard
 
 ### Frontend
 
-* React
-* Tailwind CSS
-* Recharts
-* Axios
-* React Icons
+| Technology | Purpose |
+|------------|----------|
+| React | Component-based UI development |
+| Tailwind CSS | Utility-first responsive styling |
+| Axios | HTTP requests to backend APIs |
+| Recharts | Data visualization and analytics charts |
+| React Icons | Lightweight icon library |
 
 ### Backend
 
-* Node.js
-* Express.js
-* Axios
+| Technology | Purpose |
+|------------|----------|
+| Node.js | JavaScript runtime environment |
+| Express.js | REST API development |
+| Axios | GitHub API communication |
 
 ### APIs
 
-* GitHub REST API
+| API | Purpose |
+|------|----------|
+| GitHub REST API | Fetch public developer and repository data |
 
 ### Deployment
 
-* Vercel (Frontend)
-* Render (Backend)
+| Platform | Purpose |
+|----------|----------|
+| Vercel | Frontend hosting |
+| Render | Backend hosting |
 
 ---
 
 ## Project Structure
 
 ```text
-github-repo-explorer/
+github-repo-explorer
 │
-├── client/
-│   ├── src/
-│   │   ├── components/
-│   │   ├── pages/
-│   │   ├── services/
+├── client
+│   ├── src
+│   │   ├── components
+│   │   │   ├── DeveloperAnalytics.jsx
+│   │   │   ├── ProfileCard.jsx
+│   │   │   ├── RepoCard.jsx
+│   │   │   ├── RepoList.jsx
+│   │   │   └── StatsCards.jsx
+│   │   │
+│   │   ├── pages
+│   │   │   └── Home.jsx
+│   │   │
+│   │   ├── services
+│   │   │   └── githubService.js
+│   │   │
 │   │   ├── App.jsx
 │   │   └── main.jsx
 │   │
 │   └── package.json
 │
-├── server/
-│   ├── controllers/
-│   ├── routes/
-│   ├── services/
+├── server
+│   ├── controllers
+│   │   └── github.controller.js
+│   │
+│   ├── routes
+│   │   └── github.routes.js
+│   │
+│   ├── services
+│   │   ├── cacheService.js
+│   │   └── githubService.js
+│   │
 │   ├── app.js
 │   └── package.json
 │
@@ -311,13 +495,23 @@ This project strengthened practical understanding of:
 
 ---
 
-## Future Enhancements
+## Next Steps
 
-* GitHub OAuth Authentication
-* Repository Comparison Tool
-* Contribution Activity Tracking
-* Advanced Developer Insights
-* Repository Trend Analysis
+Due to the limited assessment timeline, the following features were intentionally left out:
+
+- Repository pagination for users with large repository counts
+- Debounced search-as-you-type
+- Automated backend testing
+- Persistent server-side cache using Redis
+
+Future improvements:
+
+- GitHub OAuth Authentication
+- Repository Comparison Tool
+- Contribution Activity Tracking
+- Advanced Developer Insights
+- Repository Trend Analysis
+- Redis-based distributed caching
 
 ---
 
